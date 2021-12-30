@@ -12,4 +12,10 @@ export default defineConfig({
       pagesDir: path.join(__dirname, 'pages'),
     }),
   ],
+  server: {
+    host: '0.0.0.0',
+    port: 8200,
+    strictPort: true,
+    open: false,
+  },
 })
