@@ -1,0 +1,114 @@
+---
+title: 渐变文字
+---
+
+import { BackgroundClipDemo } from './demos.tsx'
+
+## CSS 实现文字渐变显隐动画
+
+### 案例来源
+
+[Shining Text](https://codepen.io/alphardex/pen/VwweapQ)
+
+#### 示例
+
+你可以点击下方按钮展开完整代码，复制并在本地运行
+
+<Demo src="./shadeText.tsx" />
+
+### 实现步骤
+
+#### 主要 CSS
+
+- background-clip: text
+- background: linear-gradient()
+
+#### 案例分析
+
+##### 背景
+
+案例中使用了渐变背景
+
+这里我们来创建一个渐变背景
+
+<Demo src="./linearGradientDemo1.tsx" />
+
+渐变背景默认是从上到下的，但案例中明显可以看到背景移动时中间明亮，两边较暗，这里我们改变一下渐变背景角度
+
+<Demo src="./linearGradientDemo2.tsx" />
+
+接下来让背景动起来，注意要设置 `background-size` 不为 100%，否则背景是无法移动的
+
+这里只是简单写下基础样式，可以根据自己的喜好实现更复杂的效果
+
+<Demo src="./linearGradientDemo3.tsx" />
+
+##### 添加文字样式
+
+设置文字颜色为透明、`background-clip: text` 这样我们就得到一个带渐变色的文字效果
+
+<Demo src="./linearGradientDemo4.tsx" />
+
+接下来设置一个外层元素并将背景为黑色
+
+设置 `background-repeat: no-repeat`、并将背景大小设置到 100% 以内，这样当背景移动时只有高亮色时字体会显示，其他情况下字体会保持和背景相同色
+
+<Demo src="./linearGradientDemo5.tsx" />
+
+设置不设置 `background-repeat: no-repeat` 的情况
+
+<Demo src="./linearGradientDemo6.tsx" />
+
+至此，案例中的效果基本上已经实现了，如果想要让效果更完善，可以设置其他样式
+
+### 完整代码
+
+#### css
+
+```css
+.box {
+  display: flex;
+  height: 160px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: black;
+}
+
+.text {
+  display: inline-block;
+  font-size: 2em;
+  font-family: Lato, sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  background-size: 80%;
+  background-repeat: no-repeat;
+  color: transparent;
+  background-clip: text;
+  animation: animation 3s linear infinite;
+}
+
+@keyframes animation {
+  from {
+    background-position: -500%;
+  }
+  to {
+    background-position: 500%;
+  }
+}
+```
+
+#### html
+
+
+```html
+<div class="box">
+  <p class="text">测试用文字测试用文字测试用文字测试用文字测试用文字</p>
+</div>
+```
